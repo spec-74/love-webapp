@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>A Small Bridge • For Us</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap">
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        :root {
+            /* Light theme (default) - Warm, gentle love palette */
+            --bg-primary: #fff9fb;
+            --bg-secondary: #fff0f5;
+            --bg-card: #ffffff;
+            --text-primary: #3d1e2a;
+            --text-secondary: #7a4a5a;
+            --accent-love: #e63976;
+            --accent-soft: #ffb8d1;
+            --accent-calm: #d4a5c2;
+            --border-light: #f8dde8;
+            --shadow: rgba(230, 57, 118, 0.08);
+            --code-bg: #fdf2f7;
+            --success: #7bc9a5;
+            --warning: #e6a872;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient-love: linear-gradient(135deg, #e63976, #ff7bac);
+            --safe-area-inset-top: env(safe-area-inset-top, 20px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 20px);
+        }
+
+        .dark-mode {
+            /* Dark theme - Intimate, gentle night palette */
+            --bg-primary: #1a0a12;
+            --bg-secondary: #24131c;
+            --bg-card: #2d1a25;
+            --text-primary: #f7e6ef;
+            --text-secondary: #d4b8c9;
+            --accent-love: #ff7bac;
+            --accent-soft: #c97693;
+            --accent-calm: #9a6b87;
+            --border-light: #3e2a35;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --code-bg: #36252e;
+            --success: #5da786;
+            --warning: #c98a5a;
+            --gradient-love: linear-gradient(135deg, #ff7bac, #e63976);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 184, 209, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(212, 165, 194, 0.15) 0%, transparent 25%);
+            background-attachment: fixed;
+            padding-top: var(--safe-area-inset-top);
+            padding-bottom: var(--safe-area-inset-bottom);
+        }
+
+        /* iPhone notch & home indicator compatibility */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
+            }
+        }
+
+        /* Smooth scrolling for iOS */
+        html {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        /* Typography - More personal, gentle */
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.4rem);
+            background: var(--gradient-love);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+            animation: titleAppear 0.8s ease-out;
+        }
+
+        @keyframes titleAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-love);
+            border-radius: 2px;
+            animation: underlineGrow 1s ease-out 0.5s both;
+        }
+
+        @keyframes underlineGrow {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            100% {
+                width: 60px;
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            font-size: clamp(1.4rem, 4vw, 1.6rem);
+            color: var(--accent-love);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-soft);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        h2:hover:after {
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            color: var(--accent-love);
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Layout - More organic, flowing */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 3vw, 1.5rem);
+        }
+
+        header {
+            text-align: center;
+            padding: clamp(2rem, 5vw, 3rem) 0 clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            animation: headerSlideIn 0.7s ease-out;
+        }
+
+        @keyframes headerSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline {
+            font-size: clamp(1.1rem, 3vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-weight: 300;
+            line-height: 1.7;
+            font-style: italic;
+            animation: taglineAppear 1s ease-out 0.3s both;
+        }
+
+        @keyframes taglineAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-decoration {
+            font-size: 1.5rem;
+            color: var(--accent-love);
+            margin: 0 0.5rem;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+            }
+            33% { 
+                transform: translateY(-5px) rotate(5deg); 
+            }
+            66% { 
+                transform: translateY(-3px) rotate(-5deg); 
+            }
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .composer-section {
+                grid-column: 1 / span 2;
+            }
+            
+            .memory-section {
+                grid-column: 1 / span 2;
+            }
+        }
+
+        /* Cards & Sections - Softer, more organic */
+        .section {
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2rem);
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-love);
+            opacity: 0.7;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .section:hover:before {
+            transform: scaleX(1);
+        }
+
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px var(--shadow);
+        }
+
+        /* Message Editor - More personal */
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .toggle-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .toggle-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 54px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--accent-soft);
+            border-radius: 34px;
+            transition: var(--transition);
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "💻";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--accent-love);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+            content: "💖";
+        }
+
+        .code-mode-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-light);
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            resize: vertical;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        textarea::placeholder {
+            color: var(--accent-soft);
+            font-style: italic;
+            transition: opacity 0.3s ease;
+        }
+
+        textarea:focus::placeholder {
+            opacity: 0.5;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-love);
+            box-shadow: 0 0 0 4px rgba(230, 57, 118, 0.15);
+            transform: translateY(-2px);
+        }
+
+        textarea.code-mode {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--code-bg);
+            font-size: 1rem;
+            line-height: 1.8;
+            border-color: var(--accent-calm);
+            animation: codeModePulse 2s infinite;
+        }
+
+        @keyframes codeModePulse {
+            0%, 100% { border-color: var(--accent-calm); }
+            50% { border-color: var(--accent-love); }
+        }
+
+        .syntax-highlight {
+            color: var(--accent-love);
+            font-weight: 600;
+            position: relative;
+            animation: highlightPulse 3s infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .starter-messages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .starter-btn {
+            padding: 0.7rem 1.2rem;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .starter-btn:before {
+            content: "✨";
+            font-size: 0.9rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.8; }
+        }
+
+        .starter-btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .starter-btn:hover, .starter-btn:focus {
+            background: var(--gradient-love);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(230, 57, 118, 0.2);
+        }
+
+        .starter-btn:hover:after, .starter-btn:focus:after {
+            left: 100%;
+        }
+
+        /* Emotion Meter - More emotional, gentle */
+        .emotion-meter {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .emotion-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .emotion-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .emotion-btn {
+            padding: 1.2rem 0.5rem;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border: 2px solid transparent;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            animation: emotionBtnAppear 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .emotion-btn:nth-child(1) { animation-delay: 0.1s; }
+        .emotion-btn:nth-child(2) { animation-delay: 0.2s; }
+        .emotion-btn:nth-child(3) { animation-delay: 0.3s; }
+        .emotion-btn:nth-child(4) { animation-delay: 0.4s; }
+        .emotion-btn:nth-child(5) { animation-delay: 0.5s; }
+        .emotion-btn:nth-child(6) { animation-delay: 0.6s; }
+        .emotion-btn:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes emotionBtnAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .emotion-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-love);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .emotion-btn:hover, .emotion-btn:focus {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--accent-soft);
+            box-shadow: 0 8px 24px rgba(230, 57, 118, 0.15);
+        }
+
+        .emotion-btn:hover:before {
+            opacity: 0.1;
+        }
+
+        .emotion-btn.selected {
+            background: var(--gradient-love);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 57, 118, 0.25);
+            animation: selectedEmotion 0.6s ease;
+        }
+
+        @keyframes selectedEmotion {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+            100% { transform: translateY(-3px) scale(1); }
+        }
+
+        .emotion-btn.selected:before {
+            opacity: 0;
+        }
+
+        .emotion-icon {
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .emotion-btn:hover .emotion-icon {
+            animation: emojiBounce 0.6s ease;
+        }
+
+        @keyframes emojiBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .emotion-name {
+            z-index: 2;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .intensity-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            animation: intensityAppear 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes intensityAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .intensity-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .intensity-value {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-love);
+            background: var(--bg-card);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            min-width: 50px;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease;
+            animation: valuePulse 1s infinite;
+        }
+
+        @keyframes valuePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .intensity-slider {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, var(--accent-calm), var(--accent-love));
+            border-radius: 10px;
+            outline: none;
+            transition: transform 0.3s ease;
+        }
+
+        .intensity-slider:active {
+            transform: scaleY(1.2);
+        }
+
+        .intensity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--accent-love);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .intensity-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(230, 57, 118, 0.3);
+        }
+
+        .suggestion-box {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-top: 1.5rem;
+            border-left: 5px solid var(--accent-love);
+            position: relative;
+            overflow: hidden;
+            animation: suggestionSlideIn 0.6s ease-out;
+        }
+
+        @keyframes suggestionSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .suggestion-box:before {
+            content: '💭';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: thoughtFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes thoughtFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            75% { transform: translateY(3px) rotate(-5deg); }
+        }
+
+        .suggestion-title {
+            color: var(--accent-love);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .suggestion-title:before {
+            content: '🌟';
+            font-size: 1.2rem;
+            animation: starTwinkle 2s infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        #suggestionText {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: 0;
+        }
+
+        /* Apology Composer - More relational */
+        .composer-section {
+            position: relative;
+        }
+
+        .composer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .composer-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.7;
+        }
+
+        .tone-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            background: var(--bg-secondary);
+            padding: 0.8rem;
+            border-radius: 50px;
+            width: fit-content;
+            margin: 0 auto 2rem;
+            animation: toneToggleAppear 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes toneToggleAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tone-btn {
+            padding: 0.8rem 1.8rem;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .tone-btn.active {
+            background: var(--gradient-love);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(230, 57, 118, 0.2);
+            animation: toneSelected 0.4s ease;
+        }
+
+        @keyframes toneSelected {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .tone-btn:hover:not(.active) {
+            background: var(--accent-soft);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .composer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .composer-column {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            animation: composerColumnAppear 0.6s ease-out;
+        }
+
+        .composer-column:nth-child(1) { animation-delay: 0.1s; }
+        .composer-column:nth-child(2) { animation-delay: 0.2s; }
+        .composer-column:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes composerColumnAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .composer-column:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-soft);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .composer-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e63976' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            padding-right: 2.5rem;
+        }
+
+        .composer-select:focus {
+            outline: none;
+            border-color: var(--accent-love);
+            box-shadow: 0 0 0 4px rgba(230, 57, 118, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .preview-box {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 2px dashed var(--accent-soft);
+            position: relative;
+            min-height: 160px;
+            animation: previewAppear 0.6s ease-out 0.4s both;
+        }
+
+        @keyframes previewAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .preview-box:before {
+            content: '💌';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 2rem;
+            background: var(--bg-card);
+            padding: 0 1rem;
+            animation: envelopeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes envelopeFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            75% { transform: translateY(3px) rotate(-5deg); }
+        }
+
+        #composerPreview {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Reflection Prompts - More gentle, inviting */
+        .prompts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .prompt-card {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 16px;
+            padding: 1.8rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+            animation: promptCardAppear 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .prompt-card:nth-child(1) { animation-delay: 0.1s; }
+        .prompt-card:nth-child(2) { animation-delay: 0.2s; }
+        .prompt-card:nth-child(3) { animation-delay: 0.3s; }
+        .prompt-card:nth-child(4) { animation-delay: 0.4s; }
+        .prompt-card:nth-child(5) { animation-delay: 0.5s; }
+        .prompt-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes promptCardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) rotateX(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .prompt-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-love);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .prompt-card:hover, .prompt-card:focus {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-soft);
+            box-shadow: 0 12px 32px rgba(230, 57, 118, 0.15);
+        }
+
+        .prompt-card:hover:before {
+            opacity: 1;
+            animation: promptGlow 2s infinite;
+        }
+
+        @keyframes promptGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .prompt-title {
+            color: var(--accent-love);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .prompt-title:before {
+            content: "🌸";
+            font-size: 1.3rem;
+            animation: flowerSway 3s ease-in-out infinite;
+        }
+
+        @keyframes flowerSway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        .prompt-card p {
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        /* Send Button & Confirmation - More loving */
+        .send-container {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+            position: relative;
+            animation: sendContainerAppear 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes sendContainerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .send-btn {
+            padding: 1.2rem 4rem;
+            background: var(--gradient-love);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 32px rgba(230, 57, 118, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            animation: sendBtnPulse 2s infinite;
+        }
+
+        @keyframes sendBtnPulse {
+            0%, 100% { 
+                box-shadow: 0 8px 32px rgba(230, 57, 118, 0.3); 
+            }
+            50% { 
+                box-shadow: 0 8px 32px rgba(230, 57, 118, 0.5), 
+                          0 0 40px rgba(230, 57, 118, 0.2); 
+            }
+        }
+
+        .send-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .send-btn:hover, .send-btn:focus {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(230, 57, 118, 0.4);
+            animation: none;
+        }
+
+        .send-btn:hover:before {
+            left: 100%;
+        }
+
+        .send-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .confirmation {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--gradient-love);
+            color: white;
+            border-radius: 24px;
+            margin-top: 2rem;
+            display: none;
+            animation: confirmationAppear 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes confirmationAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .confirmation:before {
+            content: '💖';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: confettiFloat 20s linear infinite;
+        }
+
+        @keyframes confettiFloat {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .confirmation.show {
+            display: block;
+            animation: confirmationShow 0.6s ease;
+        }
+
+        @keyframes confirmationShow {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .heart-pulse {
+            font-size: clamp(3rem, 8vw, 4rem);
+            margin-bottom: 1.5rem;
+            animation: heartBeat 1.5s infinite;
+            display: inline-block;
+            filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .confirmation h3 {
+            color: white;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+        }
+
+        .confirmation p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        /* Memory Box - More personal, keepsake-like */
+        .memory-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .memory-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .action-btn:hover, .action-btn:focus {
+            background: var(--accent-soft);
+            color: var(--text-primary);
+            transform: translateY(-3px);
+            border-color: var(--accent-soft);
+        }
+
+        .memory-entries {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 1rem;
+            margin-top: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .memory-entries::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .memory-entries::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .memory-entries::-webkit-scrollbar-thumb {
+            background: var(--accent-love);
+            border-radius: 10px;
+        }
+
+        .memory-entry {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent-love);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: memoryEntryAppear 0.5s ease-out;
+        }
+
+        @keyframes memoryEntryAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .memory-entry:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-love);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .memory-entry:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .memory-entry:hover:before {
+            opacity: 0.05;
+            animation: memoryGlow 2s infinite;
+        }
+
+        @keyframes memoryGlow {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.1; }
+        }
+
+        .memory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .memory-emotion {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            color: var(--accent-love);
+            font-size: 1.1rem;
+        }
+
+        .memory-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .memory-message {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 2;
+            padding-right: 2rem;
+        }
+
+        .memory-intensity {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.2rem;
+            background: var(--bg-primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            animation: intensityFlash 1s infinite;
+        }
+
+        @keyframes intensityFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .memory-intensity:before {
+            content: '⚡';
+            font-size: 1rem;
+            animation: lightning 1s infinite;
+        }
+
+        @keyframes lightning {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(230, 57, 118, 0.1);
+            border: none;
+            color: var(--accent-love);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .delete-btn:hover, .delete-btn:focus {
+            background: var(--accent-love);
+            color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .empty-memory {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.1rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 2px dashed var(--border-light);
+            animation: emptyPulse 3s infinite;
+        }
+
+        @keyframes emptyPulse {
+            0%, 100% { border-color: var(--border-light); }
+            50% { border-color: var(--accent-soft); }
+        }
+
+        .empty-memory:before {
+            content: '📝';
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+            animation: pencilWrite 2s infinite;
+        }
+
+        @keyframes pencilWrite {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(10deg); }
+            75% { transform: translateY(5px) rotate(-10deg); }
+        }
+
+        /* Safety Notice - More caring, supportive */
+        .safety-notice {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 4rem;
+            border: 2px solid var(--border-light);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+            animation: safetyNoticeAppear 0.8s ease-out 0.8s both;
+        }
+
+        @keyframes safetyNoticeAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .safety-notice:before {
+            content: '🛡️';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: shieldFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes shieldFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            75% { transform: translateY(5px) rotate(-5deg); }
+        }
+
+        .safety-title {
+            color: var(--warning);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .safety-title:before {
+            content: "🤍";
+            font-size: 1.3rem;
+            animation: heartBeatSlow 2s infinite;
+        }
+
+        @keyframes heartBeatSlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .safety-notice p {
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+
+        /* Theme Toggle & Footer - More integrated */
+        .theme-toggle-container {
+            position: fixed;
+            top: calc(var(--safe-area-inset-top) + 1rem);
+            right: clamp(1rem, 3vw, 1.5rem);
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-love);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(230, 57, 118, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-size: 1.5rem;
+            animation: themeToggleFloat 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @keyframes themeToggleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 8px 32px rgba(230, 57, 118, 0.35);
+            animation: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border-light);
+            margin-top: 3rem;
+            position: relative;
+            padding-bottom: calc(2rem + var(--safe-area-inset-bottom));
+        }
+
+        footer:before {
+            content: '💍';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            background: transparent;
+            padding: 0 2rem;
+            animation: sparkleSpin 4s linear infinite;
+        }
+
+        @keyframes sparkleSpin {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        /* Focus States for Accessibility */
+        button:focus, input:focus, select:focus, textarea:focus {
+            outline: 3px solid var(--accent-love);
+            outline-offset: 3px;
+        }
+
+        /* iPhone-specific optimizations */
+        @media (max-width: 768px) {
+            /* Better touch targets for mobile */
+            button, 
+            .starter-btn, 
+            .emotion-btn, 
+            .tone-btn, 
+            .action-btn,
+            .prompt-card {
+                min-height: 44px; /* Apple's recommended minimum touch target */
+            }
+            
+            /* Adjust spacing for mobile */
+            .section {
+                padding: 1.2rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Stack grid items on mobile */
+            .composer-grid,
+            .prompts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Emotion buttons in 2 columns on mobile */
+            .emotion-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Adjust font sizes for mobile */
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .send-btn {
+                padding: 1rem 2.5rem;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            /* Better mobile memory box */
+            .memory-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .memory-actions {
+                justify-content: center;
+            }
+            
+            /* Fix for iOS zoom on input */
+            textarea, select {
+                font-size: 16px; /* Prevents iOS zoom */
+            }
+        }
+
+        /* Dark mode adjustments */
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light-mode) {
+                --bg-primary: #1a0a12;
+                --bg-secondary: #24131c;
+                --bg-card: #2d1a25;
+                --text-primary: #f7e6ef;
+                --text-secondary: #d4b8c9;
+                --accent-love: #ff7bac;
+                --accent-soft: #c97693;
+                --accent-calm: #9a6b87;
+                --border-light: #3e2a35;
+                --shadow: rgba(0, 0, 0, 0.3);
+                --code-bg: #36252e;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .theme-toggle-container,
+            .send-container,
+            .tone-toggle,
+            .starter-messages,
+            .memory-controls,
+            .safety-notice,
+            footer {
+                display: none !important;
+            }
+            
+            .section {
+                box-shadow: none;
+                border: 2px solid #e63976;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            h1 {
+                -webkit-text-fill-color: #e63976;
+                background: none;
+            }
+            
+            .memory-entries {
+                max-height: none;
+                overflow: visible;
+            }
+            
+            body {
+                background: white;
+                color: #3d1e2a;
+            }
+            
+            @page {
+                margin: 2cm;
+            }
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-heart {
+            font-size: 4rem;
+            color: var(--accent-love);
+            animation: loadingHeart 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingHeart {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        /* Haptic feedback simulation */
+        @media (hover: none) and (pointer: coarse) {
+            button:active,
+            .starter-btn:active,
+            .emotion-btn:active,
+            .prompt-card:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-heart">💝</div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>A Little Space for Us</h1>
+            <p class="tagline">
+                When we get mixed up or misunderstood 
+                <span class="heart-decoration">❤️</span>
+                this is just a small place for me to talk to you honestly. 
+                Because you're more important to me than any argument.
+            </p>
+        </header>
+
+        <main>
+            <!-- Message Editor Section -->
+            <section class="section">
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <h2>What I Want to Say to You</h2>
+                        <div class="toggle-container">
+                            <span class="code-mode-label">Coder Mode</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="codeModeToggle" aria-label="Toggle coder's heart mode">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="emotion-intro">
+                        Sometimes I explain my feelings better through code metaphors. 
+                        But no matter how I say it, the point is the same: I care about you so much, and I'm here.
+                    </p>
+                    <textarea id="messageEditor" placeholder="Write what you really feel... the things you'd say if it was just the two of us in the same room."></textarea>
+                    
+                    <div class="starter-messages">
+                        <button class="starter-btn" data-text="I'm sorry for making you feel unheard. You matter to me, and so does your voice.">Your voice matters</button>
+                        <button class="starter-btn" data-text="I didn't realize how much that meant to you. Thank you for trusting me with something so personal.">Thank you for trusting me</button>
+                        <button class="starter-btn" data-text="I really want to understand where you're coming from. Can you help me see it the way you do?">Help me see your point of view</button>
+                        <button class="starter-btn" data-text="I care about us more than being right. I choose us, every time.">I choose us</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emotion Meter Section -->
+            <section class="section">
+                <div class="emotion-meter">
+                    <h2>How Do You Feel?</h2>
+                    <p class="emotion-intro">I want to meet you where you are. If you're feeling...</p>
+                    
+                    <div class="emotion-buttons" id="emotionButtons">
+                        <!-- Emotion buttons will be generated by JavaScript -->
+                    </div>
+                    
+                    <div class="intensity-container">
+                        <div class="intensity-label">
+                            <span>How strong is it?</span>
+                            <span id="intensityValue" class="intensity-value">5</span>
+                        </div>
+                        <input type="range" id="intensitySlider" class="intensity-slider" min="1" max="10" value="5" aria-label="Emotion intensity">
+                    </div>
+                    
+                    <div class="suggestion-box" id="suggestionBox">
+                        <div class="suggestion-title">From Me to You</div>
+                        <p id="suggestionText">Choose how you're feeling, and I'll try to share how I want to support you.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apology Composer Section -->
+            <section class="section composer-section">
+                <div class="composer-header">
+                    <h2>Let's Work Through This Together</h2>
+                </div>
+                <p class="composer-intro">
+                    Sometimes I don't know how to word things the right way. 
+                    This helps me put together something real — something that shows I'm listening, that I get it, and that I want us to be okay.
+                </p>
+                
+                <div class="tone-toggle">
+                    <button class="tone-btn active" data-tone="plain">Just Me</button>
+                    <button class="tone-btn" data-tone="poetic">A Little Softer</button>
+                    <button class="tone-btn" data-tone="formal">Carefully Said</button>
+                </div>
+                
+                <div class="composer-grid">
+                    <div class="composer-column">
+                        <h3>I Hear You</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--accent-soft);">What I understand</p>
+                        <select id="acknowledgeSelect" class="composer-select">
+                            <option value="">What I see...</option>
+                            <option value="I can see I hurt you, and I'm really sorry.">I can see I hurt you, and I'm really sorry.</option>
+                            <option value="I know I messed up, and I get why it upset you.">I know I messed up, and I get why it upset you.</option>
+                            <option value="I understand why you're upset, and your feelings make total sense.">Your feelings make sense to me.</option>
+                            <option value="I'm sorry for what I did and how it affected you.">I'm sorry for how I made you feel.</option>
+                        </select>
+                    </div>
+                    
+                    <div class="composer-column">
+                        <h3>Our Feelings</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--accent-soft);">What we're feeling</p>
+                        <select id="feelingsSelect" class="composer-select">
+                            <option value="">What's going on inside...</option>
+                            <option value="I reacted defensively, but now I regret it and I see your side.">I reacted defensively, but I regret it.</option>
+                            <option value="I know you might have felt dismissed, and that wasn't fair to you.">You must have felt dismissed, and that wasn't fair.</option>
+                            <option value="I feel bad about what happened and how it came across.">I feel bad about how things went.</option>
+                            <option value="I imagine that what I said hurt, and I'm really sorry.">I know my words hurt you, and I'm sorry.</option>
+                        </select>
+                    </div>
+                    
+                    <div class="composer-column">
+                        <h3>Moving Forward</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--accent-soft);">What I want for us</p>
+                        <select id="commitmentSelect" class="composer-select">
+                            <option value="">How I want to do better...</option>
+                            <option value="I want to listen better next time — what you feel matters to me.">I'll listen better next time.</option>
+                            <option value="When you're ready, can we talk it through? I'll be here.">We can talk whenever you're ready.</option>
+                            <option value="I want to work through this together, as a team.">I want us to figure this out together.</option>
+                            <option value="I'll be more mindful of your feelings — they matter to me.">I want to be more mindful of your feelings.</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="preview-box">
+                    <h3>Our Message</h3>
+                    <p id="composerPreview">As you pick things above, a message will appear here — something real, from me to you.</p>
+                </div>
+            </section>
+
+            <!-- Reflection Prompts Section -->
+            <section class="section">
+                <h2>Little Moments for Us</h2>
+                <p>Some small prompts to help us reconnect. Pick any that feel right for the moment.</p>
+                
+                <div class="prompts-container" id="promptsContainer">
+                    <!-- Prompt cards will be generated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Send Button -->
+            <div class="send-container">
+                <button class="send-btn" id="sendBtn">
+                    <span style="margin-right: 10px;">💌</span>
+                    Send This to My Heart
+                    <span style="margin-left: 10px;">→</span>
+                </button>
+            </div>
+
+            <!-- Confirmation Message -->
+            <div class="confirmation" id="confirmation">
+                <div class="heart-pulse">💝</div>
+                <h3>Message Saved</h3>
+                <p>Your message is saved in the Memory Box—just a little reminder of what you're trying to say and how much you care.</p>
+                <p>Whenever you're ready to share it, this space will be here waiting for us.</p>
+            </div>
+
+            <!-- Memory Box Section -->
+            <section class="section memory-section">
+                <div class="memory-controls">
+                    <h2>Our Memory Box</h2>
+                    <div class="memory-actions">
+                        <button class="action-btn" id="exportBtn">📥 Save Messages</button>
+                        <button class="action-btn" id="importBtn">📤 Load Older Ones</button>
+                        <button class="action-btn" id="clearBtn">🌱 Clear Everything</button>
+                    </div>
+                </div>
+                <p>Every message you've written—every time you tried to reach out—gets saved here.</p>
+                
+                <div class="memory-entries" id="memoryEntries">
+                    <!-- Memory entries will be loaded from localStorage -->
+                </div>
+            </section>
+
+            <!-- Safety Notice -->
+            <div class="safety-notice">
+                <div class="safety-title">With Care</div>
+                <p>
+                    If what we're dealing with ever feels heavier than a simple disagreement—
+                    if it touches old wounds or feels overwhelming—just remember that talking to a
+                    professional can really help. Therapists and counselors exist for moments like these.
+                    This little page is here for small gentle conversations, but deeper things deserve real support too.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <p>A Small Bridge • Made with love for the space between us • Everything stays right here with you</p>
+            <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                You can refresh anytime—your messages stay saved.
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+    
+       
+        const state = {
+            message: '',
+            emotion: null,
+            intensity: 5,
+            tone: 'plain',
+            messages: []
+        };
+
+        // Feelings (simplified, more natural wording)
+        const emotions = [
+            { id: 'sad', name: 'A bit sad', emoji: '🌧️', suggestion: 'I can tell this hurts. Can I be here with you in it?' },
+            { id: 'hurt', name: 'Hurt', emoji: '💔', suggestion: "I'm sorry my words landed wrong. What part hurt the most? I want to understand." },
+            { id: 'distant', name: 'Distant', emoji: '🌌', suggestion: 'I feel that space too. What would help us feel closer again?' },
+            { id: 'frustrated', name: 'Frustrated', emoji: '🌀', suggestion: 'This feels stuck. Let\'s figure it out together, even slowly.' },
+            { id: 'anxious', name: 'Anxious', emoji: '🌊', suggestion: 'I can see you\'re overwhelmed. Let\'s breathe—what would help you right now?' },
+            { id: 'tired', name: 'Tired', emoji: '🌙', suggestion: 'It\'s okay to take a break. We can come back to this when you have energy.' },
+            { id: 'loving', name: 'Still loving', emoji: '💝', suggestion: 'Even through all of this, your love still shows. I feel it, and it means a lot.' }
+        ];
+
+        // Reflection prompts (natural, simple)
+        const prompts = [
+            { title: 'Take a breath', text: 'Let\'s try: 4 seconds in, hold for 4, then 6 out. Nice and easy.' },
+            { title: 'One small thing', text: 'What\'s one tiny thing I could do right now to help?' },
+            { title: 'Check-in', text: 'What do you need most: someone to listen, someone to understand, or just a bit of space?' },
+            { title: 'Body check', text: 'Where do you feel this in your body? Put a hand there gently.' },
+            { title: 'One word', text: 'If this feeling was a color or weather, what would it be?' },
+            { title: 'Future us', text: 'What do you hope we\'ll be proud of when we look back on this moment?' }
+        ];
+
+        // Tone variations (simplified, more human)
+        const toneVariations = {
+            plain: {
+                acknowledge: [
+                    "I can see I hurt you, and I'm really sorry.",
+                    "I realize I messed up, and I understand why it upset you.",
+                    'Your feelings make sense to me.',
+                    "I'm sorry for how my actions affected you."
+                ],
+                feelings: [
+                    'I got defensive, but I regret that now.',
+                    'You probably felt ignored, and that wasn\'t fair to you.',
+                    'I feel bad about how things went and how it made you feel.',
+                    "I know my words hurt, and I'm sorry."
+                ],
+                commitment: [
+                    'I\'ll listen better next time.',
+                    'Whenever you\'re ready, we can talk. I\'m here.',
+                    'I want to work through this with you.',
+                    'I\'ll try harder to be mindful of your feelings.'
+                ]
+            },
+            poetic: {
+                acknowledge: [
+                    'I see the weight my words put on your heart.',
+                    'I know I created distance between us, and I\'m sorry.',
+                    'I can feel the ache behind your silence.',
+                    'I\'m trying to build a bridge back to you.'
+                ],
+                feelings: [
+                    'My guard was up, but your honesty got through.',
+                    'I know you felt pushed aside—I hear you now.',
+                    'Regret has been sitting with me since we talked.',
+                    'I know I bruised your heart, and I shouldn\'t have.'
+                ],
+                commitment: [
+                    'I\'ll slow down and really hear you next time.',
+                    'Let\'s find a calm moment to talk when you\'re ready.',
+                    'I want us to move forward gently, together.',
+                    'I want to care for your feelings the way they deserve.'
+                ]
+            },
+            formal: {
+                acknowledge: [
+                    'I understand my actions caused you distress.',
+                    'I recognize how my behavior affected you.',
+                    'Your feelings are completely valid.',
+                    'Please accept my sincere apology.'
+                ],
+                feelings: [
+                    'I was defensive at first, but I now understand your point.',
+                    'I see how you may have felt unheard.',
+                    'I regret how this situation unfolded.',
+                    'I can see my words were hurtful, and I\'m sorry.'
+                ],
+                commitment: [
+                    'I\'ll work on listening more attentively.',
+                    'We can talk whenever it feels right for you.',
+                    'I want to resolve this respectfully with you.',
+                    'I\'ll be more considerate of your emotional needs.'
+                ]
+            }
+        };
+
+        // Gather Our Tools
+        const elements = {
+            loadingOverlay: document.getElementById('loadingOverlay'),
+            messageEditor: document.getElementById('messageEditor'),
+            codeModeToggle: document.getElementById('codeModeToggle'),
+            emotionButtons: document.getElementById('emotionButtons'),
+            intensitySlider: document.getElementById('intensitySlider'),
+            intensityValue: document.getElementById('intensityValue'),
+            suggestionBox: document.getElementById('suggestionBox'),
+            suggestionText: document.getElementById('suggestionText'),
+            acknowledgeSelect: document.getElementById('acknowledgeSelect'),
+            feelingsSelect: document.getElementById('feelingsSelect'),
+            commitmentSelect: document.getElementById('commitmentSelect'),
+            composerPreview: document.getElementById('composerPreview'),
+            promptsContainer: document.getElementById('promptsContainer'),
+            sendBtn: document.getElementById('sendBtn'),
+            confirmation: document.getElementById('confirmation'),
+            memoryEntries: document.getElementById('memoryEntries'),
+            exportBtn: document.getElementById('exportBtn'),
+            importBtn: document.getElementById('importBtn'),
+            clearBtn: document.getElementById('clearBtn'),
+            themeToggle: document.getElementById('themeToggle'),
+            toneButtons: document.querySelectorAll('.tone-btn')
+        };
+
+        // iPhone vibration simulation (when supported)
+        function vibrate(pattern = [50]) {
+            if (navigator.vibrate) {
+                navigator.vibrate(pattern);
+            }
+        }
+
+        // Plant The Seeds (Initialize)
+        async function init() {
+            // Show loading animation
+            elements.loadingOverlay.style.display = 'flex';
+            
+            // Simulate loading time for smooth animation
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            // Load saved messages from our garden
+            loadMessages();
+            
+            // Plant emotion buttons
+            renderEmotionButtons();
+            
+            // Plant reflection prompts
+            renderPrompts();
+            
+            // Connect all the pieces
+            setupEventListeners();
+            
+            // Set the right tone
+            updateComposerOptions();
+            
+            // Show our growing message
+            updateComposerPreview();
+            
+            // Check for dark mode preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                elements.themeToggle.querySelector('.theme-icon').textContent = '☀️';
+            }
+            
+            // Load theme preference
+            const savedTheme = localStorage.getItem('smallBridgeTheme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                elements.themeToggle.querySelector('.theme-icon').textContent = '☀️';
+            } else if (savedTheme === 'light') {
+                document.body.classList.remove('dark-mode');
+                elements.themeToggle.querySelector('.theme-icon').textContent = '🌙';
+            }
+            
+            // Hide loading overlay with animation
+            setTimeout(() => {
+                elements.loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    elements.loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 300);
+            
+            // iPhone-specific optimizations
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                document.body.classList.add('ios-device');
+                // Add iOS-specific event listeners
+                setupIOSListeners();
+            }
+        }
+
+        // iOS-specific optimizations
+        function setupIOSListeners() {
+            // Prevent elastic scrolling on body
+            document.body.addEventListener('touchmove', (e) => {
+                if (e.target === document.body) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Better scrolling for iOS
+            const scrollableElements = document.querySelectorAll('.memory-entries, textarea');
+            scrollableElements.forEach(el => {
+                el.style.WebkitOverflowScrolling = 'touch';
+            });
+        }
+
+        // Connect The Heartstrings (Event Listeners)
+        function setupEventListeners() {
+            // Message editor - when words flow
+            elements.messageEditor.addEventListener('input', (e) => {
+                state.message = e.target.value;
+                if (elements.codeModeToggle.checked) applyLoveSyntax();
+            });
+            
+            // Coder's heart mode toggle
+            elements.codeModeToggle.addEventListener('change', (e) => {
+                elements.messageEditor.classList.toggle('code-mode', e.target.checked);
+                if (e.target.checked) {
+                    applyLoveSyntax();
+                    vibrate([30]);
+                }
+            });
+            
+            // Starter message buttons - little love notes
+            document.querySelectorAll('.starter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const text = btn.getAttribute('data-text');
+                    elements.messageEditor.value += (elements.messageEditor.value ? ' ' : '') + text;
+                    state.message = elements.messageEditor.value;
+                    if (elements.codeModeToggle.checked) applyLoveSyntax();
+                    
+                    // Visual feedback with vibration
+                    btn.style.transform = 'scale(0.95)';
+                    vibrate([20]);
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Intensity slider - how deeply felt
+            elements.intensitySlider.addEventListener('input', (e) => {
+                state.intensity = parseInt(e.target.value);
+                elements.intensityValue.textContent = state.intensity;
+                
+                // Visual feedback
+                elements.intensityValue.style.transform = 'scale(1.2)';
+                vibrate([10]);
+                setTimeout(() => {
+                    elements.intensityValue.style.transform = '';
+                }, 200);
+            });
+            
+            // Composer selects - building bridges
+            elements.acknowledgeSelect.addEventListener('change', updateComposerPreview);
+            elements.feelingsSelect.addEventListener('change', updateComposerPreview);
+            elements.commitmentSelect.addEventListener('change', updateComposerPreview);
+            
+            // Tone buttons - finding our voice
+            elements.toneButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    elements.toneButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.tone = btn.getAttribute('data-tone');
+                    updateComposerOptions();
+                    updateComposerPreview();
+                    vibrate([20, 20]);
+                });
+            });
+            
+            // Send button - releasing with love
+            elements.sendBtn.addEventListener('click', sendMessage);
+            
+            // Memory garden actions
+            elements.exportBtn.addEventListener('click', exportMessages);
+            elements.importBtn.addEventListener('click', importMessages);
+            elements.clearBtn.addEventListener('click', clearMessages);
+            
+            // Theme toggle - light and dark, like days and nights
+            elements.themeToggle.addEventListener('click', toggleTheme);
+            
+            // Keyboard love - for everyone
+            document.addEventListener('keydown', (e) => {
+                // Escape closes confirmation
+                if (e.key === 'Escape') {
+                    elements.confirmation.classList.remove('show');
+                }
+                
+                // Ctrl/Cmd + S to send
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Touch feedback for mobile
+            if ('ontouchstart' in window) {
+                document.addEventListener('touchstart', function() {}, {passive: true});
+            }
+        }
+
+        // Plant Emotion Flowers
+        function renderEmotionButtons() {
+            elements.emotionButtons.innerHTML = '';
+            
+            emotions.forEach((emotion, index) => {
+                const button = document.createElement('button');
+                button.className = 'emotion-btn';
+                button.setAttribute('data-emotion', emotion.id);
+                button.setAttribute('aria-label', `Feeling ${emotion.name}`);
+                button.style.animationDelay = `${index * 0.05}s`;
+                button.innerHTML = `
+                    <span class="emotion-icon">${emotion.emoji}</span>
+                    <span class="emotion-name">${emotion.name}</span>
+                `;
+                
+                button.addEventListener('click', () => {
+                    // Clear previous selection
+                    document.querySelectorAll('.emotion-btn').forEach(btn => {
+                        btn.classList.remove('selected');
+                        btn.style.animation = 'emotionBtnAppear 0.3s ease';
+                    });
+                    
+                    // Mark this one
+                    button.classList.add('selected');
+                    state.emotion = emotion.id;
+                    
+                    // Update suggestion with love
+                    elements.suggestionText.textContent = emotion.suggestion;
+                    elements.suggestionBox.style.opacity = '0';
+                    setTimeout(() => {
+                        elements.suggestionBox.style.opacity = '1';
+                    }, 10);
+                    
+                    // Gentle animation with haptic feedback
+                    button.style.animation = 'selectedEmotion 0.6s ease';
+                    vibrate([30, 30, 30]);
+                });
+                
+                elements.emotionButtons.appendChild(button);
+            });
+        }
+
+        // Plant Reflection Petals
+        function renderPrompts() {
+            elements.promptsContainer.innerHTML = '';
+            
+            prompts.forEach((prompt, index) => {
+                const card = document.createElement('div');
+                card.className = 'prompt-card';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Reflection: ${prompt.title}`);
+                card.style.animationDelay = `${index * 0.05}s`;
+                
+                card.innerHTML = `
+                    <div class="prompt-title">${prompt.title}</div>
+                    <p>${prompt.text}</p>
+                `;
+                
+                card.addEventListener('click', () => {
+                    // Add to message editor with love
+                    const separator = elements.messageEditor.value ? '\n\n' : '';
+                    elements.messageEditor.value += separator + prompt.text;
+                    state.message = elements.messageEditor.value;
+                    if (elements.codeModeToggle.checked) applyLoveSyntax();
+                    
+                    // Visual love feedback with haptic
+                    card.style.transform = 'scale(0.98)';
+                    card.style.backgroundColor = 'var(--accent-soft)';
+                    vibrate([20]);
+                    setTimeout(() => {
+                        card.style.transform = '';
+                        card.style.backgroundColor = '';
+                    }, 300);
+                });
+                
+                elements.promptsContainer.appendChild(card);
+            });
+        }
+
+        // Update Composer Options for Our Tone
+        function updateComposerOptions() {
+            const toneData = toneVariations[state.tone];
+            
+            // Update "I Hear You" options
+            elements.acknowledgeSelect.innerHTML = '<option value="">What I see...</option>';
+            toneData.acknowledge.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                elements.acknowledgeSelect.appendChild(opt);
+            });
+            
+            // Update "Our Feelings" options
+            elements.feelingsSelect.innerHTML = '<option value="">What\'s going on inside...</option>';
+            toneData.feelings.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                elements.feelingsSelect.appendChild(opt);
+            });
+            
+            // Update "Moving Forward" options
+            elements.commitmentSelect.innerHTML = '<option value="">How I want to do better...</option>';
+            toneData.commitment.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                elements.commitmentSelect.appendChild(opt);
+            });
+        }
+
+        // Grow Our Preview Message
+        function updateComposerPreview() {
+            const acknowledge = elements.acknowledgeSelect.value;
+            const feelings = elements.feelingsSelect.value;
+            const commitment = elements.commitmentSelect.value;
+            
+            let preview = '';
+            
+            if (acknowledge) preview += acknowledge + ' ';
+            if (feelings) preview += feelings + ' ';
+            if (commitment) preview += commitment;
+            
+            if (preview.trim()) {
+                elements.composerPreview.textContent = preview.trim();
+                elements.composerPreview.style.opacity = '0';
+                setTimeout(() => {
+                    elements.composerPreview.style.opacity = '1';
+                    elements.composerPreview.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        elements.composerPreview.style.transform = 'translateY(0)';
+                    }, 200);
+                }, 10);
+                
+                // If message editor is empty or shows old preview, update it
+                if (!state.message || state.message === elements.composerPreview.dataset.lastPreview) {
+                    elements.messageEditor.value = preview.trim();
+                    state.message = preview.trim();
+                    if (elements.codeModeToggle.checked) applyLoveSyntax();
+                }
+                
+                elements.composerPreview.dataset.lastPreview = preview.trim();
+            } else {
+                elements.composerPreview.textContent = 'As you pick things above, a message will appear here — something real, from me to you.';
+                delete elements.composerPreview.dataset.lastPreview;
+            }
+        }
+
+        // Apply Love Syntax Highlighting (for coder's heart mode)
+        function applyLoveSyntax() {
+            // In a full implementation, this would highlight love words
+            // For now, we'll add a subtle visual effect
+            if (elements.codeModeToggle.checked) {
+                elements.messageEditor.style.boxShadow = '0 0 30px rgba(230, 57, 118, 0.1)';
+                setTimeout(() => {
+                    elements.messageEditor.style.boxShadow = '';
+                }, 1000);
+            }
+        }
+
+        // Send Message to Our Garden
+        async function sendMessage() {
+            if (!state.message.trim()) {
+                // Shake animation for empty message
+                elements.messageEditor.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    elements.messageEditor.style.animation = '';
+                }, 500);
+                alert('Please write from your heart first. Even a few words matter.');
+                elements.messageEditor.focus();
+                return;
+            }
+            
+            if (!state.emotion) {
+                // Shake emotion buttons
+                elements.emotionButtons.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    elements.emotionButtons.style.animation = '';
+                }, 500);
+                alert('Help me understand how you might be feeling. Pick an emotion that feels closest.');
+                return;
+            }
+            
+            // Button press animation
+            elements.sendBtn.style.transform = 'scale(0.95)';
+            vibrate([50]);
+            
+            const messageData = {
+                id: Date.now(),
+                text: state.message,
+                emotion: state.emotion,
+                emotionName: emotions.find(e => e.id === state.emotion)?.name || state.emotion,
+                emotionEmoji: emotions.find(e => e.id === state.emotion)?.emoji || '💭',
+                intensity: state.intensity,
+                date: new Date().toLocaleString('en-US', { 
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                timestamp: Date.now()
+            };
+            
+            // Add to our garden
+            state.messages.unshift(messageData);
+            
+            // Save to browser's memory
+            saveMessages();
+            
+            // Update our memory garden display
+            renderMemoryBox();
+            
+            // Show love confirmation with celebration
+            elements.confirmation.classList.add('show');
+            vibrate([100, 50, 100]);
+            
+            // Scroll to confirmation with love
+            elements.confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form (but keep our tone)
+            elements.messageEditor.value = '';
+            state.message = '';
+            
+            // Clear emotion selection with animation
+            document.querySelectorAll('.emotion-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 300);
+            });
+            state.emotion = null;
+            
+            // Reset intensity
+            elements.intensitySlider.value = 5;
+            elements.intensityValue.textContent = '5';
+            state.intensity = 5;
+            
+            // Reset suggestion
+            elements.suggestionText.textContent = 'Choose how you\'re feeling, and I\'ll try to share how I want to support you.';
+            
+            // Reset button after animation
+            setTimeout(() => {
+                elements.sendBtn.style.transform = '';
+            }, 300);
+            
+            // Hide confirmation after 6 seconds (with love)
+            setTimeout(() => {
+                elements.confirmation.classList.remove('show');
+            }, 6000);
+        }
+
+        // Save Messages to Browser's Heart
+        function saveMessages() {
+            try {
+                localStorage.setItem('smallBridgeMessages', JSON.stringify(state.messages));
+            } catch (e) {
+                console.error('Couldn\'t save to garden:', e);
+                alert('Your browser\'s memory is full. Consider exporting some memories to make space.');
+            }
+        }
+
+        // Load Messages from Browser's Heart
+        function loadMessages() {
+            try {
+                const saved = localStorage.getItem('smallBridgeMessages');
+                if (saved) {
+                    state.messages = JSON.parse(saved);
+                    renderMemoryBox();
+                }
+            } catch (e) {
+                console.error('Couldn\'t load from garden:', e);
+            }
+        }
+
+        // Render Our Memory Garden
+        function renderMemoryBox() {
+            elements.memoryEntries.innerHTML = '';
+            
+            if (state.messages.length === 0) {
+                elements.memoryEntries.innerHTML = `
+                    <div class="empty-memory">
+                        No messages in our box yet.<br>
+                        Write your first note and watch it appear here.
+                    </div>
+                `;
+                return;
+            }
+            
+            state.messages.forEach((msg, index) => {
+                const emotion = emotions.find(e => e.id === msg.emotion);
+                
+                const entry = document.createElement('div');
+                entry.className = 'memory-entry';
+                entry.style.animationDelay = `${index * 0.05}s`;
+                entry.innerHTML = `
+                    <div class="memory-header">
+                        <div class="memory-emotion">
+                            <span class="emotion-icon">${emotion?.emoji || msg.emotionEmoji || '💭'}</span>
+                            <span>${emotion?.name || msg.emotionName || msg.emotion}</span>
+                            <span class="memory-intensity">${msg.intensity}/10</span>
+                        </div>
+                        <div class="memory-date">${msg.date}</div>
+                    </div>
+                    <div class="memory-message">${msg.text}</div>
+                    <button class="delete-btn" data-id="${msg.id}" aria-label="Remove this memory">✕</button>
+                `;
+                
+                // Add delete with love
+                const deleteBtn = entry.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', () => deleteMessage(msg.id));
+                
+                elements.memoryEntries.appendChild(entry);
+            });
+        }
+
+        // Delete a Memory (with care)
+        function deleteMessage(id) {
+            if (confirm('Remove this message from our box?')) {
+                // Find and animate the deletion
+                const entry = document.querySelector(`.delete-btn[data-id="${id}"]`).closest('.memory-entry');
+                entry.style.animation = 'fadeOutLeft 0.5s ease';
+                setTimeout(() => {
+                    state.messages = state.messages.filter(msg => msg.id !== id);
+                    saveMessages();
+                    renderMemoryBox();
+                    vibrate([30]);
+                }, 500);
+            }
+        }
+
+        // Export Our Garden
+        function exportMessages() {
+            if (state.messages.length === 0) {
+                // Shake animation
+                elements.exportBtn.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    elements.exportBtn.style.animation = '';
+                }, 500);
+                alert('Our box is empty. Write some messages first.');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(state.messages, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `our-messages-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            // Feedback
+            vibrate([20, 20]);
+            elements.exportBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                elements.exportBtn.style.transform = '';
+            }, 200);
+        }
+
+        // Import Memories
+        function importMessages() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        if (Array.isArray(imported)) {
+                            // Merge with existing memories
+                            const existingIds = new Set(state.messages.map(m => m.id));
+                            const newMessages = imported.filter(msg => !existingIds.has(msg.id));
+                            
+                            if (newMessages.length > 0) {
+                                state.messages = [...newMessages, ...state.messages];
+                                saveMessages();
+                                renderMemoryBox();
+                                // Success animation
+                                elements.importBtn.style.animation = 'successPulse 1s ease';
+                                setTimeout(() => {
+                                    elements.importBtn.style.animation = '';
+                                }, 1000);
+                                vibrate([30, 30, 30]);
+                                alert(`Imported ${newMessages.length} message(s) to our box.`);
+                            } else {
+                                alert('All these messages are already in our box.');
+                            }
+                        } else {
+                            alert('This doesn\'t look like a message file. Please choose a valid export.');
+                        }
+                    } catch (error) {
+                        alert('Couldn\'t read these messages. Make sure it\'s a valid file.');
+                    }
+                };
+                
+                reader.readAsText(file);
+            });
+            
+            input.click();
+        }
+
+        // Clear All Memories (fresh start)
+        function clearMessages() {
+            if (state.messages.length === 0) {
+                alert('Our box is already empty.');
+                return;
+            }
+            
+            if (confirm('Clear all messages? This can\'t be undone, but you can always write new ones.')) {
+                // Animate clearing
+                const entries = document.querySelectorAll('.memory-entry');
+                entries.forEach((entry, index) => {
+                    entry.style.animationDelay = `${index * 0.05}s`;
+                    entry.style.animation = 'fadeOutRight 0.5s ease';
+                });
+                
+                setTimeout(() => {
+                    state.messages = [];
+                    saveMessages();
+                    renderMemoryBox();
+                    vibrate([100]);
+                    alert('Box cleared. Fresh start.');
+                }, 500);
+            }
+        }
+
+        // Toggle Light/Dark Theme
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            elements.themeToggle.querySelector('.theme-icon').textContent = isDark ? '☀️' : '🌙';
+            
+            // Save preference with love
+            localStorage.setItem('smallBridgeTheme', isDark ? 'dark' : 'light');
+            
+            // Gentle animation with haptic
+            elements.themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+            vibrate([30]);
+            setTimeout(() => {
+                elements.themeToggle.style.transform = '';
+            }, 400);
+        }
+
+        // Add shake animation for empty fields
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            
+            @keyframes successPulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+            }
+            
+            @keyframes fadeOutLeft {
+                from { opacity: 1; transform: translateX(0); }
+                to { opacity: 0; transform: translateX(-100px); }
+            }
+            
+            @keyframes fadeOutRight {
+                from { opacity: 1; transform: translateX(0); }
+                to { opacity: 0; transform: translateX(100px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Start Our Garden (when page loads)
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
